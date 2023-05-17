@@ -1,64 +1,41 @@
-<div>
-    <h1>PANIER</h1>
+@extends('layouts.myshop')
+@section('main')
 
+<div class="row pb-4 mb-5">
+    <div class="col-lg-8 mb-5 mb-lg-0">
+        <form method="post" action="">
+            <div class="table-responsive">
+                <table class="shop_table cart">
+                    <thead>
+                        <tr class="text-color-dark">
+                            <th class="product-thumbnail" width="15%">
+                                &nbsp;
+                            </th>
+                            <th class="product-name text-uppercase" width="30%">
+                                Produits
+                            </th>
+                            <th class="product-price text-uppercase" width="15%">
+                                Prix
+                            </th>
+                            <th class="product-quantity text-uppercase" width="20%">
+                                Quantité
+                            </th>
+                            <th class="product-subtotal text-uppercase text-end" width="20%">
+                                Sous-total
+                            </th>
+                        </tr>
+                    </thead>
 
-    <div class="relative py-10 overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="font-serif text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        PRODUITS
-                    </th>
-    
-                    <th scope="col" class="px-6 py-3">
-                        QUANTITE
-                    </th>
+                    <tbody>
 
-                    <th scope="col" class="px-6 py-3">
-                        PRIX
-                    </th>
+                        @forelse ($carts as $itemCart)
+                        
+                        <x-panier.card :itemCart='$itemCart'/>
+        
+                        @empty
+                            Panier vide 
+                        @endforelse
 
-                    <th scope="col" class="px-6 py-3">
-                        TOTAL
-                    </th>
-    
-                </tr>
-            </thead>
+                    </tbody>
 
-            <tbody>
-
-                @forelse ($carts as $itemCart)
-                <tr>
-                    <th scope="col" class="px-6 py-3 font-serif">
-                        {{$itemCart->produit->name}}
-                    </th>
-
-                    <th scope="col" class="px-6 py-3 font-serif">
-                        {{$itemCart->quantite}}
-                    </th>
-
-                    <th scope="col" class="px-6 py-3 font-serif">
-                        {{$itemCart->prix}}
-                    </th>
-
-                    <th scope="col" class="px-6 py-3 font-serif">
-                        {{$itemCart->quantite * $itemCart->prix }}
-                    </th>
-                </tr>
-
-                @empty
-                    Panier vide 
-                @endforelse
-
-                <tr>
-                    <th>
-                        TOTAL COMMANDE : 
-                    </th>
-                </tr>
-
-            </tbody>
-
-        </table>
-    </div>
-
-</div>
+@endsection

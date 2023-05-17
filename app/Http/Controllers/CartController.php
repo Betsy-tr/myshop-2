@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Produit;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
@@ -13,8 +15,10 @@ class CartController extends Controller
     public function index()
     {
         $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $produits = Produit::orderBy('created_at','desc')->get();
+        $categories = Categorie::orderBy('name','asc')->get();
 
-        return view('panier',compact('carts'));
+        return view('panier',compact('carts','produits','categories'));
     }
 
 
@@ -43,11 +47,11 @@ class CartController extends Controller
         } else {
             
             Cart::create(["user_id" => Auth::user()->id,
-                      "produit_id" => $produit->id,
-                      "quantite" => 1,
-                      "prix" =>$produit->prix]);
+                          "produit_id" => $produit->id,
+                          "quantite" => 1,
+                          "prix" =>$produit->prix]);
 
         };
-        //return Redirect::route('accueil.detail');
+        return Redirect::route('accueil');
     }
 }

@@ -29,8 +29,11 @@ class ProduitsController extends Controller
         
         $produits = Produit::where('categorie_id', $produit->categorie_id)
                           -> inRandomOrder()->limit(4)->get(); // Sélectionner les 4 produits similaires de la catégorie aléatoirement 
+
         
-        return view('detail', compact('produit', 'produits'));
+        $categories = Categorie::orderBy('name','asc')->get();
+        
+        return view('detail', compact('produit', 'produits', 'categories'));
     }
 
     

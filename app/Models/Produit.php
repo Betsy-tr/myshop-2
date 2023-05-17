@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Categorie;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produit extends Model
 {
@@ -17,8 +21,16 @@ class Produit extends Model
         return $this->belongsTo(User::class) ; 
     }
 
+
     public function categorie() : BelongsTo
     {
         return $this->belongsTo(Categorie::class) ; 
     }
+
+
+
+ /*   public function category() : BelongsTo
+    {
+        return $this->belongsTo(Categorie::class) ; 
+    }*/
 }
